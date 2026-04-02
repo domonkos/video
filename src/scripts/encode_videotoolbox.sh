@@ -1,5 +1,5 @@
 #!/bin/bash
-# VERSION: 1.0
+# VERSION: 1.1
 INPUT="$1"
 
 if [ -z "$INPUT" ]; then
@@ -7,12 +7,13 @@ if [ -z "$INPUT" ]; then
   exit 1
 fi
 
+DIRNAME="$(dirname "$INPUT")"
 BASENAME="$(basename "$INPUT")"
 FILENAME="${BASENAME%.*}"
 
-TEMP="${FILENAME}_temp.mp4"
+TEMP="${DIRNAME}/${FILENAME}_temp.mp4"
 TIMESTAMP=$(date +"%Y%m%d_%H%M")
-OUTPUT="${FILENAME}_HDR_vdtb_v1_${TIMESTAMP}.mp4"
+OUTPUT="${DIRNAME}/${FILENAME}_HDR_vdtb_v1_${TIMESTAMP}.mp4"
 
 echo "▶️ 1. step: HW encode (VideoToolbox)..."
 
@@ -28,7 +29,7 @@ echo "▶️ 2. step: HDR metadata"
 
 ffmpeg -y -i "$TEMP" \
 -c copy \
--metadata comment="Script Version: v1.0  (VideoToolbox)" \
+-metadata comment="Script Version: v1.1 (VideoToolbox)" \
 -color_primaries bt2020 \
 -color_trc smpte2084 \
 -colorspace bt2020nc \
