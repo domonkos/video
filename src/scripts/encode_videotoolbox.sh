@@ -1,5 +1,5 @@
 #!/bin/bash
-# VERSION: 1.3
+# VERSION: 1.4
 
 TEST_MODE=false
 FFMPEG_LIMIT=""
@@ -62,6 +62,7 @@ echo "▶️ 1. step: HW encode (VideoToolbox)..."
 ffmpeg $FFMPEG_LIMIT -y -i "$INPUT" \
 -c:v hevc_videotoolbox \
 -profile:v main10 \
+-pix_fmt yuv420p10le \
 -tag:v hvc1 \
 -b:v 25M \
 -c:a copy \
@@ -71,7 +72,9 @@ echo "▶️ 2. step: HDR metadata"
 
 ffmpeg -y -i "$TEMP" \
 -c copy \
--metadata comment="Script Version: v1.3 (VideoToolbox|5-fix-encoding-for-yt)" \
+-movflags write_colr \
+-bsf:v hevc_metadata=colour_primaries=9:transfer_characteristics=16:matrix_coefficients=9 \
+-metadata comment="Script Version: v1.4 (VideoToolbox|5-fix-encoding-for-yt)" \
 -color_primaries bt2020 \
 -color_trc smpte2084 \
 -colorspace bt2020nc \
