@@ -1,5 +1,5 @@
 #!/bin/bash
-# VERSION: 1.2
+# VERSION: 1.3
 
 TEST_MODE=false
 FFMPEG_LIMIT=""
@@ -62,8 +62,8 @@ echo "▶️ 1. step: HW encode (VideoToolbox)..."
 ffmpeg $FFMPEG_LIMIT -y -i "$INPUT" \
 -c:v hevc_videotoolbox \
 -profile:v main10 \
--q:v 70 \
 -tag:v hvc1 \
+-b:v 25M \
 -c:a copy \
 "$TEMP"
 
@@ -71,7 +71,7 @@ echo "▶️ 2. step: HDR metadata"
 
 ffmpeg -y -i "$TEMP" \
 -c copy \
--metadata comment="Script Version: v1.2 (VideoToolbox)" \
+-metadata comment="Script Version: v1.3 (VideoToolbox|5-fix-encoding-for-yt)" \
 -color_primaries bt2020 \
 -color_trc smpte2084 \
 -colorspace bt2020nc \
