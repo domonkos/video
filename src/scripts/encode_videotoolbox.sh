@@ -62,7 +62,7 @@ echo "▶️ 1. step: HW encode (VideoToolbox)..."
 ffmpeg $FFMPEG_LIMIT -y -i "$INPUT" \
 -c:v hevc_videotoolbox \
 -profile:v main10 \
--pix_fmt yuv420p10le \
+-pix_fmt p010le \
 -tag:v hvc1 \
 -b:v 25M \
 -c:a copy \
@@ -74,7 +74,7 @@ ffmpeg -y -i "$TEMP" \
 -c copy \
 -movflags write_colr \
 -bsf:v hevc_metadata=colour_primaries=9:transfer_characteristics=16:matrix_coefficients=9 \
--metadata comment="Script Version: v1.4 (VideoToolbox|5-fix-encoding-for-yt)" \
+-metadata comment="Script Version: v1.4 (VideoToolbox|7-fix-youtube-hdr-metadata)" \
 -color_primaries bt2020 \
 -color_trc smpte2084 \
 -colorspace bt2020nc \
