@@ -73,7 +73,7 @@ echo "▶️ 2. step: HDR metadata"
 ffmpeg -y -i "$TEMP" \
 -c copy \
 -movflags write_colr \
--bsf:v hevc_metadata=colour_primaries=9:transfer_characteristics=16:matrix_coefficients=9:master_display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1):max_cll=1000,400 \
+"-bsf:v hevc_metadata=colour_primaries=9:transfer_characteristics=16:matrix_coefficients=9:master_display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1):max_cll=1000,400" \
 -metadata comment="Script Version: v1.5 (VideoToolbox|9-inject-hdr10-sei-mastering-display-maxcll)" \
 -color_primaries bt2020 \
 -color_trc smpte2084 \
